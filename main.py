@@ -75,7 +75,6 @@ def wheel(pos):
 # def alarmColor(pos):
 #    if (pos < 0 or pos > 255)
 
-
 def setLEDColor(color, npixels, numpixels=16):
     for p in range(numpixels):
         npixels[p] = color
@@ -95,11 +94,15 @@ def addtrello(kbd):
 def taskmanager(kbd):
     kbd.send(Keycode.CONTROL,Keycode.SHIFT,Keycode.ESCAPE)
 
+def f5(kbd):
+    kbd.send(Keycode.f5)
 
 
 i = 0
 layout = KeyboardLayoutUS(kbd)
 while True:    
+
+    # setLEDColor(RED,neopixels,16)
  
     # set analog output to 0-3.3V (0-65535 in increments)
     aout.value = i * 256
@@ -116,12 +119,55 @@ while True:
 
         # wintab(kbd)
         # cad(kbd)
-        addtrello(kbd)
+        # addtrello(kbd)
         # taskmanager(kbd)
         
+        longpress = False
+        
+        kbd.send(Keycode.A)
         kbd.release_all()
+        
+        while not button.value:
+            time.sleep(0.2)
+            for i in range(120):
+                time.sleep(0.008)
+                if button.value:
+                    # if quick press
+                    kbd.send(Keycode.S)
+                    break
+                    
+                else:
+                    # if not quick press
+                    kbd.send(Keycode.L)
+                    longpress = True
+                    break
+        
+        
+        # time.sleep(0.5) # gives more time before this code is executed when button is held down
+        
+
+        
         while(not button.value):
+            # this is executed after the button has been held down for the first execution
+            longpress = True
+            # kbd.send(Keycode.R)
             pass
+        if longpress == True:
+            # long press execution
+            #kbd.send(Keycode.O)
+            wintab(kbd)
+        else:
+            # short press execution
+            # kbd.send(Keycode.U)
+            addtrello(kbd)
+        # this is executed once when the button is let go of
+        # kbd.send(Keycode.Z)
+        
+        #if longpress == True:
+            #addtrello(kbd)
+        #else:
+            #wintab(kbd)
+
             
 
     i = (i+1) % 256  # run from 0 to 255

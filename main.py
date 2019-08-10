@@ -96,6 +96,19 @@ def taskmanager(kbd):
 
 def f5(kbd):
     kbd.send(Keycode.f5)
+    
+def cortana(kbd):
+    kbd.send(Keycode.WINDOWS,Keycode.C)
+
+def wox(kbd):
+    kbd.send(Keycode.CONTROL,Keycode.SPACEBAR)
+
+def cmatrix(kbd):
+    None
+    # os.system('bash -c "cmatrix"')
+
+def gamebar(kbd):
+    kbd.send(Keycode.WINDOWS,Keycode.G)
 
 
 i = 0
@@ -139,7 +152,8 @@ while True:
             pass
         if longpress == True:
             # laong press execution
-            cad(kbd)
+            # cad(kbd)
+            gamebar(kbd)
         else:
             # short press execution
             addtrello(kbd)

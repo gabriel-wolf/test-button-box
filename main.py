@@ -116,15 +116,8 @@ while True:
     led.value = touch.value
     if not button.value:
         print("Button on D2 pressed!")
-
-        # wintab(kbd)
-        # cad(kbd)
-        # addtrello(kbd)
-        # taskmanager(kbd)
         
         longpress = False
-        
-        kbd.send(Keycode.A)
         kbd.release_all()
         
         while not button.value:
@@ -133,40 +126,25 @@ while True:
                 time.sleep(0.008)
                 if button.value:
                     # if quick press
-                    kbd.send(Keycode.S)
                     break
-                    
+                   
                 else:
                     # if not quick press
-                    kbd.send(Keycode.L)
                     longpress = True
                     break
-        
-        
-        # time.sleep(0.5) # gives more time before this code is executed when button is held down
-        
-
         
         while(not button.value):
             # this is executed after the button has been held down for the first execution
             longpress = True
-            # kbd.send(Keycode.R)
             pass
         if longpress == True:
-            # long press execution
-            #kbd.send(Keycode.O)
-            wintab(kbd)
+            # laong press execution
+            cad(kbd)
         else:
             # short press execution
-            # kbd.send(Keycode.U)
             addtrello(kbd)
         # this is executed once when the button is let go of
-        # kbd.send(Keycode.Z)
-        
-        #if longpress == True:
-            #addtrello(kbd)
-        #else:
-            #wintab(kbd)
+
 
             
 
